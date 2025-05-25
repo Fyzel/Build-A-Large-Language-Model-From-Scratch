@@ -1,9 +1,23 @@
+"""
+Text Retrieval and Analysis Module
+
+This module downloads 'the-verdict.txt' from a GitHub repository and performs
+basic text analysis. It retrieves the text file using urllib, reads its
+content, and outputs character count statistics and a preview of the text.
+
+Functions:
+    No explicit functions defined, functionality is executed at module level.
+
+Usage:
+    Run this module directly to download and analyze the text file.
+"""
+
 import urllib.request
-url = ("https://raw.githubusercontent.com/rasbt/"
+URL = ("https://raw.githubusercontent.com/rasbt/"
        "LLMs-from-scratch/main/ch02/01_main-chapter-code/"
        "the-verdict.txt")
-file_path = "the-verdict.txt"
-urllib.request.urlretrieve(url, file_path)
+FILE_PATH = "the-verdict.txt"
+urllib.request.urlretrieve(URL, FILE_PATH)
 
 with open("the-verdict.txt", "r", encoding="utf-8") as f:
     raw_text = f.read()
