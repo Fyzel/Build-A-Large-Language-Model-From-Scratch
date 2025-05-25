@@ -19,7 +19,7 @@ URL = ("https://raw.githubusercontent.com/rasbt/"
 FILE_PATH = "the-verdict.txt"
 urllib.request.urlretrieve(URL, FILE_PATH)
 
-with open("the-verdict.txt", "r", encoding="utf-8") as f:
+with open(file_path, "r", encoding="utf-8") as f:
     raw_text = f.read()
 print("Total number of character:", len(raw_text))
 print(raw_text[:99])
