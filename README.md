@@ -1,2 +1,2 @@
-# template-default-python-project
-Template for a GitHub Python project
+# Build-A-Large-Language-Model-From-Scratch
+Work based on Manning Publications' [Build a Large Language Model from Scratch](https://www.manning.com/books/build-a-large-language-model-from-scratch) reference.
