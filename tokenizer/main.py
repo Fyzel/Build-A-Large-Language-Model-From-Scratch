@@ -21,5 +21,5 @@ urllib.request.urlretrieve(URL, FILE_PATH)
 
 with open(file_path, "r", encoding="utf-8") as f:
     raw_text = f.read()
-print("Total number of character:", len(raw_text))
+print("Total number of characters:", len(raw_text))
 print(raw_text[:99])
