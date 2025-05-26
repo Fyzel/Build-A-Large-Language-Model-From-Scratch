@@ -57,8 +57,13 @@ if __name__ == "__main__":
         if i >= 50:
             break
 
+    print("\nSorting the vocabulary by token ID and extending to include |unk| and |endoftext|:")
     all_tokens = sorted(list(set(preprocessed)))
     all_tokens.extend(["<|endoftext|>", "<|unk|>"])
     vocab = {token: integer for integer, token in enumerate(all_tokens)}
 
     print(len(vocab.items()))
+
+    print("\nThe last five items in the vocabulary:")
+    for i, item in enumerate(list(vocab.items())[-5:]):
+        print(item)
