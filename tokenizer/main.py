@@ -13,6 +13,7 @@ Usage:
 """
 
 import urllib.request
+import re
 
 if __name__ == "__main__":
     print("Downloading 'the-verdict.txt' from GitHub...")
@@ -27,3 +28,11 @@ if __name__ == "__main__":
         raw_text = f.read()
     print("Total number of character:", len(raw_text))
     print(raw_text[:99])
+
+    print("\nTokenize the text into words and punctuation marks:")
+    result = re.split(r'([,.]|\s)', raw_text)
+    print(result)
+
+    print("\nRemove empty strings from the list:")
+    result = [item for item in result if item.strip()]
+    print(result)
