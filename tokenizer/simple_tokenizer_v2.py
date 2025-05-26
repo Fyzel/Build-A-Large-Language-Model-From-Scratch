@@ -103,6 +103,7 @@ class SimpleTokenizerV2:
         """
         if not isinstance(text, str):
             raise TypeError(f"Input text must be a string, got {type(text).__name__}")
+
         preprocessed = re.split(r'([,.:;?_!"()\']|--|\s)', text)
         preprocessed = [
             item.strip() for item in preprocessed if item.strip()

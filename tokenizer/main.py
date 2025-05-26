@@ -12,8 +12,10 @@ Usage:
     Run this module directly to download and analyze the text file.
 """
 
-import urllib.request
 import re
+import urllib.request
+#from importlib.metadata import version
+import tiktoken
 
 if __name__ == "__main__":
     print("Downloading 'the-verdict.txt', Edith Wharton’s short story, from GitHub...")
@@ -67,3 +69,68 @@ if __name__ == "__main__":
     print("\nThe last five items in the vocabulary:")
     for i, item in enumerate(list(vocab.items())[-5:]):
         print(item)
+
+    tokenizer = tiktoken.get_encoding("gpt2")
+
+    TEXT = (
+        "Hello, do you like tea? <|endoftext|> In the sunlit terraces"
+        " of someunknownPlace."
+    )
+
+    print("\nTokenizing the text using the GPT-2 tokenizer:")
+    print(TEXT)
+
+    integers = tokenizer.encode(TEXT, allowed_special={"<|endoftext|>"})
+
+    print("\nTokenized text into integers:")
+    print(integers)
+
+    print("\nDecoding the integers back to strings:")
+    strings = tokenizer.decode(integers)
+    print(strings)
+
+    TEXT = (
+        "Akwirw ier"
+    )
+
+    print("\nTokenizing the text using the GPT-2 tokenizer:")
+    print(TEXT)
+
+    integers = tokenizer.encode(TEXT, allowed_special={"<|endoftext|>"})
+
+    print("\nTokenized text into integers:")
+    print(integers)
+
+    print("\nDecoding the integers back to strings:")
+    strings = tokenizer.decode(integers)
+    print(strings)
+
+    print("\n----------------------------------------")
+    print("Use tiktoken to tokenize the text from the file and print the number of tokens:")
+    enc_text = tokenizer.encode(raw_text)
+    print(len(enc_text))
+
+
+    print("\nRemove the first 50 tokens from the encoded text:")
+    enc_sample = enc_text[50:]
+
+    print("Number of tokens after removing the first 50 tokens:", len(enc_sample))
+
+    CONTEXT_SIZE = 4
+    x = enc_sample[:CONTEXT_SIZE]
+    y = enc_sample[1:CONTEXT_SIZE + 1]
+    print(f"x: {x}")
+    print(f"y:      {y}")
+
+    print("\n----------------------------------------")
+    print("Next token prediction task:")
+
+    for i in range(1, CONTEXT_SIZE + 1):
+        context = enc_sample[:i]
+        desired = enc_sample[i]
+        print(context, "---->", desired)
+
+    for i in range(1, CONTEXT_SIZE + 1):
+        context = enc_sample[:i]
+        desired = enc_sample[i]
+        print(tokenizer.decode(context), "---->", tokenizer.decode([desired]))
