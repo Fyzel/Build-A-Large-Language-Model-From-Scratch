@@ -30,9 +30,14 @@ if __name__ == "__main__":
     print(raw_text[:99])
 
     print("\nTokenize the text into words and punctuation marks:")
-    result = re.split(r'([,.]|\s)', raw_text)
-    print(result)
+    preprocessed = re.split(r'([,.:;?_!"()\']|--|\s)', raw_text)
+    print(preprocessed)
 
     print("\nRemove empty strings from the list:")
-    result = [item for item in result if item.strip()]
-    print(result)
+    preprocessed = [item.strip() for item in preprocessed if item.strip()]
+    print(preprocessed)
+
+    print("\nTotal number of tokens:", len(preprocessed))
+
+    print("\nFirst 30 tokens:")
+    print(preprocessed[:30])
