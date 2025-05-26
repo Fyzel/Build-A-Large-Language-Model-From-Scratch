@@ -99,11 +99,10 @@ class SimpleTokenizerV2:
         :returns: A list of integer token IDs representing the input text. Empty text returns an
         empty list.
         :rtype: list[int]
-        :raises KeyError: If a token in the text is not found in the vocabulary
         :raises TypeError: If text is not a string
         """
-
-
+        if not isinstance(text, str):
+            raise TypeError(f"Input text must be a string, got {type(text).__name__}")
         preprocessed = re.split(r'([,.:;?_!"()\']|--|\s)', text)
         preprocessed = [
             item.strip() for item in preprocessed if item.strip()
