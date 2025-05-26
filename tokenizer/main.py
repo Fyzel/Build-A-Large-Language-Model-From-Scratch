@@ -12,14 +12,16 @@ Usage:
     Run this module directly to download and analyze the text file.
 """
 
-import urllib.request
-URL = ("https://raw.githubusercontent.com/rasbt/"
-       "LLMs-from-scratch/main/ch02/01_main-chapter-code/"
-       "the-verdict.txt")
-FILE_PATH = "the-verdict.txt"
-urllib.request.urlretrieve(URL, FILE_PATH)
+if __name__ == "__main__":
+    print("Downloading 'the-verdict.txt' from GitHub...")
+    import urllib.request
+    URL = ("https://raw.githubusercontent.com/rasbt/"
+           "LLMs-from-scratch/main/ch02/01_main-chapter-code/"
+           "the-verdict.txt")
+    FILE_PATH = "the-verdict.txt"
+    urllib.request.urlretrieve(URL, FILE_PATH)
 
-with open("the-verdict.txt", "r", encoding="utf-8") as f:
-    raw_text = f.read()
-print("Total number of character:", len(raw_text))
-print(raw_text[:99])
+    with open("the-verdict.txt", "r", encoding="utf-8") as f:
+        raw_text = f.read()
+    print("Total number of character:", len(raw_text))
+    print(raw_text[:99])
