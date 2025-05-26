@@ -16,7 +16,7 @@ import urllib.request
 import re
 
 if __name__ == "__main__":
-    print("Downloading 'the-verdict.txt' from GitHub...")
+    print("Downloading 'the-verdict.txt', Edith Wharton’s short story, from GitHub...")
 
     URL = ("https://raw.githubusercontent.com/rasbt/"
            "LLMs-from-scratch/main/ch02/01_main-chapter-code/"
