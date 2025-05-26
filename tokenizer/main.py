@@ -30,9 +30,9 @@ if __name__ == "__main__":
     print(raw_text[:99])
 
     print("\nTokenize the text into words and punctuation marks:")
-    result = re.split(r'([,.]|\s)', raw_text)
+    result = re.split(r'([,.:;?_!"()\']|--|\s)', raw_text)
     print(result)
 
     print("\nRemove empty strings from the list:")
-    result = [item for item in result if item.strip()]
+    result = [item.strip() for item in result if item.strip()]
     print(result)
