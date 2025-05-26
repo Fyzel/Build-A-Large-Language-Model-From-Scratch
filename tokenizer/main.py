@@ -16,7 +16,7 @@ import urllib.request
 import re
 
 if __name__ == "__main__":
-    print("Downloading 'the-verdict.txt' from GitHub...")
+    print("Downloading 'the-verdict.txt', Edith Wharton’s short story, from GitHub...")
 
     URL = ("https://raw.githubusercontent.com/rasbt/"
            "LLMs-from-scratch/main/ch02/01_main-chapter-code/"
@@ -41,3 +41,24 @@ if __name__ == "__main__":
 
     print("\nFirst 30 tokens:")
     print(preprocessed[:30])
+
+    print("\n----------------------------------------")
+    print("Create the sorted vocabulary")
+    all_words = sorted(set(preprocessed))
+    vocab_size = len(all_words)
+    print("\nVocabulary size:", vocab_size)
+
+    print("\nFirst 50 tokens in the vocabulary:")
+    vocab = {token: integer for integer, token in enumerate(all_words)}
+    for i, item in enumerate(vocab.items()):
+        print(item)
+
+        # Limit the output to the first 50 items
+        if i >= 50:
+            break
+
+    all_tokens = sorted(list(set(preprocessed)))
+    all_tokens.extend(["<|endoftext|>", "<|unk|>"])
+    vocab = {token: integer for integer, token in enumerate(all_tokens)}
+
+    print(len(vocab.items()))
