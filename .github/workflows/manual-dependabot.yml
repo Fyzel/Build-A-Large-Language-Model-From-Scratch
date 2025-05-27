@@ -1,4 +1,4 @@
-name: Manual Dependabot
+name: Dependabot-Manual
 
 on:
   workflow_dispatch:
