@@ -64,6 +64,19 @@ class GPTDatasetV1(Dataset):
 
         token_ids = tokenizer.encode(txt)
 
+        if not hasattr(tokenizer, 'encode'):
+            raise AttributeError("Tokenizer must have an 'encode' method")
+        if not isinstance(txt, str):
+            raise TypeError("Input text must be a string")
+        if not isinstance(max_length, int):
+            raise TypeError("max_length must be an integer")
+        if not isinstance(stride, int):
+            raise TypeError("stride must be an integer")
+        if max_length < 1:
+            raise ValueError("max_length must be at least 1")
+        if stride < 1:
+            raise ValueError("stride must be at least 1")
+
         for i in range(0, len(token_ids) - max_length, stride):
             input_chunk = token_ids[i:i + max_length]
             target_chunk = token_ids[i + 1: i + max_length + 1]
@@ -101,5 +114,12 @@ class GPTDatasetV1(Dataset):
                     >>> input_tokens, target_tokens = dataset[0]
                     >>> print(input_tokens.shape)   # torch.Size([max_length])
                     >>> print(target_tokens.shape)  # torch.Size([max_length])
-                """
+        """
+        if not isinstance(idx, int):
+            raise TypeError("Index must be an integer")
+        if idx < 0 or idx >= len(self):
+            raise IndexError("Index out of bounds")
+        if idx >= len(self.input_ids) or idx >= len(self.target_ids):
+            raise IndexError("Index out of bounds for input or target IDs")
+
         return self.input_ids[idx], self.target_ids[idx]
