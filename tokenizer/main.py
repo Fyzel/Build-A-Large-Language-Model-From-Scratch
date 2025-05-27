@@ -50,7 +50,6 @@ def create_dataloader_v1(txt,
     :rtype: DataLoader
     :raises TypeError: If txt is not a string or shuffle/drop_last are not booleans.
     :raises ValueError: If batch_size, max_length, or stride are not positive integers.
-    :raises RuntimeError: If the tokenizer is not properly initialized.
     """
 
     if not isinstance(txt, str):
