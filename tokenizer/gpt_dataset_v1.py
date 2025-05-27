@@ -62,8 +62,6 @@ class GPTDatasetV1(Dataset):
         self.input_ids = []
         self.target_ids = []
 
-        token_ids = tokenizer.encode(txt)
-
         if not hasattr(tokenizer, 'encode'):
             raise AttributeError("Tokenizer must have an 'encode' method")
         if not isinstance(txt, str):
@@ -76,6 +74,8 @@ class GPTDatasetV1(Dataset):
             raise ValueError("max_length must be at least 1")
         if stride < 1:
             raise ValueError("stride must be at least 1")
+
+        token_ids = tokenizer.encode(txt)
 
         for i in range(0, len(token_ids) - max_length, stride):
             input_chunk = token_ids[i:i + max_length]
