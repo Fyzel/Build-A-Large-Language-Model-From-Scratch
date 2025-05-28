@@ -28,8 +28,8 @@ jobs:
         run: |
           if [ -f .pylintrc ]; then
             echo "Using custom pylint configuration file: .pylintrc"
-            pylint --rcfile=.pylintrc $(git ls-files '*.py')
+            pylint --rcfile=.pylintrc -j 0 $(git ls-files '*.py')
           else
             echo "No custom pylint configuration file found, using default settings."
-            pylint $(git ls-files '*.py')
+            pylint -j 0 $(git ls-files '*.py')
           fi
