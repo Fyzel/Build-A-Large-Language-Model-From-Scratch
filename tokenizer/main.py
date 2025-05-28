@@ -17,9 +17,7 @@ import urllib.request
 
 # from importlib.metadata import version
 import tiktoken
-from torch import manual_seed
-from torch import nn
-from torch import tensor
+from torch import manual_seed, nn, tensor
 from torch.utils.data import DataLoader
 
 from tokenizer.gpt_dataset_v1 import GPTDatasetV1
@@ -222,7 +220,7 @@ if __name__ == '__main__':
     second_batch = next(data_iter)
     print(second_batch)
 
-    print('\nCreate a new DataLoader with batch_size of 8, max_length of 4, strie of 4:')
+    print('\nCreate a new DataLoader with batch_size of 8, max_length of 4, stride of 4:')
     dataloader = create_dataloader_v1(
             raw_text,
             batch_size=8,
