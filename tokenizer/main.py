@@ -18,6 +18,7 @@ import urllib.request
 # from importlib.metadata import version
 import tiktoken
 from torch.utils.data import DataLoader
+from torch import tensor, manual_seed, nn
 
 from tokenizer.gpt_dataset_v1 import GPTDatasetV1
 
@@ -81,7 +82,7 @@ def create_dataloader_v1(txt,
 
 
 if __name__ == '__main__':
-    print("Downloading 'the-verdict.txt', Edith Wharton’s short story, from GitHub...")
+    print('Downloading \'the-verdict.txt\', Edith Wharton’s short story, from GitHub...')
 
     URL = ('https://raw.githubusercontent.com/rasbt/'
            'LLMs-from-scratch/main/ch02/01_main-chapter-code/'
@@ -196,3 +197,55 @@ if __name__ == '__main__':
         context = enc_sample[:i]
         desired = enc_sample[i]
         print(tokenizer.decode(context), '---->', tokenizer.decode([desired]))
+
+    print('\n----------------------------------------')
+    print('Use DataLoader to load the novel:')
+
+    with open('the-verdict.txt', 'r', encoding='utf-8') as f:
+        raw_text = f.read()
+
+    dataloader = create_dataloader_v1(
+            raw_text,
+            batch_size=1,
+            max_length=4,
+            stride=1,
+            shuffle=False)
+    data_iter = iter(dataloader)
+    first_batch = next(data_iter)
+
+    print('\nFirst batch of data from the DataLoader:')
+    print(first_batch)
+
+    print('\nSecond batch of data from the DataLoader:')
+    second_batch = next(data_iter)
+    print(second_batch)
+
+    print('\nCreate a new DataLoader with batch_size of 8, max_length of 4, strie of 4:')
+    dataloader = create_dataloader_v1(
+            raw_text,
+            batch_size=8,
+            max_length=4,
+            stride=4,
+            shuffle=False
+    )
+
+    data_iter = iter(dataloader)
+    inputs, targets = next(data_iter)
+    print('Inputs:\n', inputs)
+    print('\nTargets:\n', targets)
+
+
+    print('\n----------------------------------------')
+    print('Create a simple embedding layer using PyTorch:')
+    input_ids = tensor([2, 3, 5, 1])
+    vocab_size = 6
+    output_dim = 3
+
+    manual_seed(123)
+    embedding_layer = nn.Embedding(vocab_size, output_dim)
+
+    print('\nprints the embedding layer’s underlying weight matrix')
+    print(embedding_layer.weight)
+
+    print('\nRetrieve the embedding vector for token ID 3:')
+    print(embedding_layer(tensor([3])))
