@@ -17,8 +17,10 @@ import urllib.request
 
 # from importlib.metadata import version
 import tiktoken
+from torch import manual_seed
+from torch import nn
+from torch import tensor
 from torch.utils.data import DataLoader
-from torch import tensor, manual_seed, nn
 
 from tokenizer.gpt_dataset_v1 import GPTDatasetV1
 
@@ -70,7 +72,7 @@ def create_dataloader_v1(txt,
 
     tiktokenizer = tiktoken.get_encoding('gpt2')
     dataset = GPTDatasetV1(txt, tiktokenizer, max_length, stride)
-    dataloader = DataLoader(
+    dl = DataLoader(
             dataset,
             batch_size=batch_size,
             shuffle=shuffle,
@@ -78,7 +80,7 @@ def create_dataloader_v1(txt,
             num_workers=num_workers
     )
 
-    return dataloader
+    return dl
 
 
 if __name__ == '__main__':
@@ -111,8 +113,8 @@ if __name__ == '__main__':
     print('\n----------------------------------------')
     print('Create the sorted vocabulary')
     all_words = sorted(set(preprocessed))
-    vocab_size = len(all_words)
-    print('\nVocabulary size:', vocab_size)
+    VOCAB_SIZE = len(all_words)
+    print('\nVocabulary size:', VOCAB_SIZE)
 
     print('\nFirst 50 tokens in the vocabulary:')
     vocab = {token: integer for integer, token in enumerate(all_words)}
@@ -234,15 +236,14 @@ if __name__ == '__main__':
     print('Inputs:\n', inputs)
     print('\nTargets:\n', targets)
 
-
     print('\n----------------------------------------')
     print('Create a simple embedding layer using PyTorch:')
     input_ids = tensor([2, 3, 5, 1])
-    vocab_size = 6
-    output_dim = 3
+    VOCAB_SIZE = 6
+    OUTPUT_DIM = 3
 
     manual_seed(123)
-    embedding_layer = nn.Embedding(vocab_size, output_dim)
+    embedding_layer = nn.Embedding(VOCAB_SIZE, OUTPUT_DIM)
 
     print('\nprints the embedding layer’s underlying weight matrix')
     print(embedding_layer.weight)
