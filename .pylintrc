@@ -3,4 +3,3 @@ max-args=10
 max-attributes=12
 max-branches=15
 max-locals=25
-too-many-positional-arguments=10
