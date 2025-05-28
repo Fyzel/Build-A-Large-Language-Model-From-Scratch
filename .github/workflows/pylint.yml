@@ -2,7 +2,6 @@ name: Pylint
 
 on:
   push:
-  pull_request:
   workflow_dispatch:
 
 jobs:
@@ -27,4 +26,4 @@ jobs:
           pip install pylint
       - name: Analysing the code with pylint
         run: |
-          pylint --rcfile=.pylintrc $(git ls-files '*.py')
+          pylint -j 0 --rcfile=.pylintrc $(git ls-files '*.py')
