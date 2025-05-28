@@ -15,11 +15,7 @@ Usage:
 import re
 import urllib.request
 
-# from importlib.metadata import version
 import tiktoken
-from torch import manual_seed
-from torch import nn
-from torch import tensor
 from torch.utils.data import DataLoader
 from torch import tensor, manual_seed, nn
 
