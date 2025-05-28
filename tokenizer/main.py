@@ -18,7 +18,8 @@ import urllib.request
 # from importlib.metadata import version
 import tiktoken
 from torch.utils.data import DataLoader
-from torch import tensor, manual_seed, nn
+from torch import tensor, manual_seed
+import torch.nn as nn
 
 from tokenizer.gpt_dataset_v1 import GPTDatasetV1
 
