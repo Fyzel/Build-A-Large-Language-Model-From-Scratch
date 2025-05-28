@@ -15,9 +15,8 @@ Usage:
 import re
 import urllib.request
 
-# from importlib.metadata import version
 import tiktoken
-from torch import manual_seed, nn, tensor
+from torch import tensor, manual_seed, nn
 from torch.utils.data import DataLoader
 
 from tokenizer.gpt_dataset_v1 import GPTDatasetV1
