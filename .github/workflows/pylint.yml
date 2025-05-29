@@ -19,15 +19,15 @@ jobs:
         uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-          pip install pylint
+
       - name: Create a virtual environment and analysing the code with pylint
         run: |
           python -m venv venv
           source venv/bin/activate
+
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install pylint
 
           if [ -f .pylintrc ]; then
             echo "Using custom pylint configuration file: .pylintrc"
