@@ -16,11 +16,12 @@ import re
 import urllib.request
 
 import tiktoken
-from torch import tensor, manual_seed, nn
+import torch
 from torch.utils.data import DataLoader
 
 from tokenizer.gpt_dataset_v1 import GPTDatasetV1
 
+print(torch.__file__)
 
 def create_dataloader_v1(txt,
                          batch_size=4,
@@ -235,15 +236,15 @@ if __name__ == '__main__':
 
     print('\n----------------------------------------')
     print('Create a simple embedding layer using PyTorch:')
-    input_ids = tensor([2, 3, 5, 1])
+    input_ids = torch.tensor([2, 3, 5, 1])
     VOCAB_SIZE = 6
     OUTPUT_DIM = 3
 
-    manual_seed(123)
-    embedding_layer = nn.Embedding(VOCAB_SIZE, OUTPUT_DIM)
+    torch.manual_seed(123)
+    embedding_layer = torch.nn.Embedding(VOCAB_SIZE, OUTPUT_DIM)
 
     print('\nprints the embedding layer’s underlying weight matrix')
     print(embedding_layer.weight)
 
     print('\nRetrieve the embedding vector for token ID 3:')
-    print(embedding_layer(tensor([3])))
+    print(embedding_layer(torch.tensor([3])))
