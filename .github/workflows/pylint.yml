@@ -24,6 +24,10 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           pip install pylint
+      - name: Create a virtual environment
+        run: |
+          python -m venv venv
+          source venv/bin/activate
       - name: Analysing the code with pylint
         run: |
           if [ -f .pylintrc ]; then
